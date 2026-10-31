@@ -1,0 +1,50 @@
+@model IEnumerable<MVC_DB_.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>我的作品</h1>
+
+<p>
+    <a asp-action="Create">新增</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.title)
+            </td>
+            <td style="max-width: 300px; word-wrap: break-word;">
+                @Html.DisplayFor(model => item.description)
+            </td>
+            <td>
+                @if (!string.IsNullOrEmpty(item.image))
+                {
+                    <img src="@item.image" width="200" />
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">修改</a> |
+                <a asp-action="Details" asp-route-id="@item.id">查看作品</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">刪除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

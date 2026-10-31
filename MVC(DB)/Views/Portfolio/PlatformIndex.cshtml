@@ -1,0 +1,114 @@
+﻿@model List<MVC_DB_.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "作品平台";
+}
+
+<h1>探索更多的作品</h1>
+
+<style>
+    .portfolio-item {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .portfolio-content {
+        flex: 1;
+    }
+
+        .portfolio-content img {
+            display: block;
+            width: 500px;
+            max-width: 100%;
+            margin-bottom: 15px;
+        }
+
+    .portfolio-user {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .portfolio-title {
+        margin-bottom: 10px;
+    }
+
+    .comment-area {
+        width: 350px;
+        height: 500px;
+        border-left: 1px solid #ccc;
+        padding-left: 20px;
+        overflow-y: auto;
+    }
+</style>
+
+@foreach (var portfolio in Model)
+{
+    <div class="portfolio-item">
+
+        <!-- 左邊：作品 -->
+        <div class="portfolio-content">
+
+            @if (portfolio.isBlocked)
+            {
+                <h2>此作品已被管理員封鎖</h2>
+
+                <p>此作品目前無法查看。</p>
+            }
+            else
+            {
+                <!-- 作品標題 -->
+                <h2 class="portfolio-title">
+                    @portfolio.title
+                </h2>
+
+                <!-- 圖片 -->
+                @if (!string.IsNullOrEmpty(portfolio.image))
+                {
+                    <img src="@portfolio.image" />
+                }
+
+                <!-- 使用者名稱 -->
+                <div class="portfolio-user">
+                    發佈者:@ViewBag.UserNames[portfolio.accountID]
+                </div>
+
+
+
+                <!-- 作品介紹 -->
+                <p>
+                    @portfolio.description
+                </p>
+
+                <!-- 按讚 -->
+                <partial name="_Like" model="portfolio" />
+            }
+
+        </div>
+
+
+        <!-- 右邊：留言 -->
+        @if (!portfolio.isBlocked)
+        {
+            <div class="comment-area">
+
+                <h3>留言</h3>
+
+                <partial name="_Comment/_CreateComment" model="portfolio" />
+
+                <div id="comments-@portfolio.id">
+                    <partial name="_Comment/_ReadComment"
+                             model="ViewBag.Comments[portfolio.id]" />
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+    <hr />
+}
+
+<script src="~/js/Like.js"></script>
+<script src="~/js/Comment.js"></script>
+

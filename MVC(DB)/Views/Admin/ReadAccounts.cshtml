@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MVC_DB_.Models.account>
+
+@{
+    ViewData["Title"] = "使用者管理";
+}
+
+<h1>使用者管理</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.userName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.passwd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.avatar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isAdmin)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.userName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.passwd)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.avatar)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.isAdmin)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

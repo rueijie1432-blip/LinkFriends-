@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNetCore.Http
+@model List<MVC_DB_.Models.Notification>
+
+@{
+    int unreadCount = Model.Count(n => !n.isRead);
+}
+
+@if (Context.Session.GetString("userName") != null)
+{
+    <div class="notification">
+
+        🔔
+
+        @if (unreadCount > 0)
+        {
+            <span class="notification-count">
+                @unreadCount
+            </span>
+        }
+
+        <div class="notification-menu">
+
+            @foreach (var notification in Model)
+            {
+                <div class="notification-item">
+
+                    @if (!notification.isRead)
+                    {
+                        <span class="notification-dot"></span>
+                    }
+
+                    @if (notification.notificationType == "like")
+                    {
+                        <span>
+                            @notification.fromUserName 按讚了作品「@notification.portfolioTitle」
+                        </span>
+                    }
+                    else if (notification.notificationType == "comment")
+                    {
+                        <span>
+                            @notification.fromUserName 留言了作品「@notification.portfolioTitle」
+                        </span>
+                    }
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+}
+
+<style>
+    .notification {
+        position: relative;
+        margin-right: 15px;
+    }
+
+    .notification-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        width: 300px;
+        background: white;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        z-index: 1000;
+    }
+
+    .notification:hover .notification-menu {
+        display: block;
+    }
+
+    .notification-count {
+        margin-left: 3px;
+        background: red;
+        color: white;
+        border-radius: 10px;
+        padding: 2px 6px;
+        font-size: 12px;
+    }
+
+    .notification-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .notification-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: red;
+        border-radius: 50%;
+        margin-right: 6px;
+    }
+</style>
+
+<script src="~/js/notification.js"></script>

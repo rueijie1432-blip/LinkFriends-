@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "LinkFriends";
+}
+
+<div class="welcome-page">
+
+    @if (ViewBag.userName != null)
+    {
+        <h1>歡迎，@ViewBag.userName！</h1>
+    }
+    else
+    {
+        <h1>歡迎來到 LinkFriends！</h1>
+    }
+
+    <p class="welcome-text">
+        分享你的作品，探索更多創作。
+    </p>
+
+    <p class="welcome-description">
+        在這裡展示自己的作品，與其他使用者交流、留言並成為好友。
+    </p>
+
+    <a asp-controller="Portfolio"
+       asp-action="PlatformIndex"
+       class="btn btn-primary">
+        探索作品
+    </a>
+
+</div>
+
+<style>
+    .welcome-page {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .welcome-page h1 {
+        font-size: 42px;
+        margin-bottom: 25px;
+    }
+
+    .welcome-text {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .welcome-description {
+        font-size: 17px;
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    .welcome-page .btn {
+        padding: 10px 30px;
+    }
+</style>
+

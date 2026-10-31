@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MVC_DB_.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "作品管理";
+}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">作品管理</h1>
+
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>作品 ID</th>
+                <th>帳號 ID</th>
+                <th>作品名稱</th>
+                <th>作品描述</th>
+                <th>作品圖片</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var portfolio in Model)
+            {
+                <tr>
+                    <td>@portfolio.id</td>
+                    <td>@portfolio.accountID</td>
+                    <td>@portfolio.title</td>
+                    <td style="max-width: 300px; word-wrap: break-word;">@portfolio.description</td>
+
+                    <td>
+                        @if (!string.IsNullOrEmpty(portfolio.image))
+                        {
+                            <img src="@portfolio.image"
+                                 style="width:100px; height:100px; object-fit:cover;" />
+                        }
+                        else
+                        {
+                            <span>無圖片</span>
+                        }
+                    </td>
+                    
+                    <td>
+                        @if (portfolio.isBlocked)
+                        {
+                            <a asp-action="SetPortfolioBlock"
+                               asp-route-id="@portfolio.id"
+                               asp-route-isBlocked="false"
+                               class="btn btn-success btn-sm">
+                                取消封鎖
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="SetPortfolioBlock"
+                               asp-route-id="@portfolio.id"
+                               asp-route-isBlocked="true"
+                               class="btn btn-danger btn-sm">
+                                封鎖
+                            </a>
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>

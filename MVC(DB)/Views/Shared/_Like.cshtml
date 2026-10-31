@@ -1,0 +1,68 @@
+﻿@model MVC_DB_.Models.Portfolio
+
+<style>
+    .like-section {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .like-section form {
+        margin: 0;
+        padding: 0;
+    }
+
+    .like-section .like-button {
+        all: unset;
+        display: inline-block;
+        color: #aaa;
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 1;
+        transition: 0.2s;
+    }
+
+    .like-section .like-button:hover {
+        color: #e74c3c;
+        transform: scale(1.2);
+    }
+
+    .like-count {
+        font-size: 16px;
+        color: #555;
+    }
+
+    .like-button:hover {
+        color: #e74c3c;
+        transform: scale(1.2);
+    }
+
+    .like-count {
+        font-size: 16px;
+        color: #555;
+    }
+</style>
+
+<div class="like-section">
+
+    <form id="likeForm-@Model.id"
+          asp-controller="PortfolioLike"
+          asp-action="Like"
+          method="post">
+
+        <input type="hidden"
+               name="portfolioID"
+               value="@Model.id" />
+
+        <button type="submit" class="like-button">
+            ♡
+        </button>
+    </form>
+
+    <span class="like-count"
+          id="like-count-@Model.id">
+        @ViewBag.LikesCount[Model.id]
+    </span>
+
+</div>

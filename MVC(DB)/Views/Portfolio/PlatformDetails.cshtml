@@ -1,0 +1,24 @@
+﻿@model MVC_DB_.Models.Portfolio
+
+@{
+    ViewData["Title"] = "作品詳細資料";
+}
+
+<h1>作品詳細資料</h1>
+
+<div>
+    <h2>@Model.title</h2>
+
+    <p>@Model.description</p>
+
+    @if (!string.IsNullOrEmpty(Model.image))
+    {
+        <img src="@Model.image" width="500" />
+    }
+
+    <p>作品 ID：@Model.id</p>
+    <p>作者 ID：@Model.accountID</p>
+</div>
+
+<a asp-action="PlatformIndex">返回作品平台</a>
+

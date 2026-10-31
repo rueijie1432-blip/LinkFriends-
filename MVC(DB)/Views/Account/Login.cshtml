@@ -1,0 +1,27 @@
+﻿<h1>登入</h1>
+
+<form asp-controller="Account" asp-action="Login" method="post">
+
+    <div>
+        <label>帳號</label>
+        <input type="text" name="userName" />
+    </div>
+
+    <div>
+        <label>密碼</label>
+        <input type="password" name="passwd" />
+    </div>
+
+
+    <button type="submit">登入</button>
+
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p>@ViewBag.Error</p>
+}
+
+<div>
+        <a asp-action="Create">還沒有帳號嗎?</a>
+</div>

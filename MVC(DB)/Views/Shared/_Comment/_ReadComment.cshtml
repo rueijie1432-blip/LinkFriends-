@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Http
+@model List<MVC_DB_.Models.PortfolioComment>
+
+@foreach (var comment in Model)
+{
+    <div class="comment-item">
+
+        @if (comment.isBlocked)
+        {
+            <p>此留言已被管理員封鎖</p>
+        }
+        else
+        {
+            <small>使用者：@ViewBag.UserNames[comment.accountID]</small>
+
+            
+            @if (Context.Session.GetInt32("accountID") == comment.accountID)
+            {
+                <button type="button"
+                        class="delete-comment"
+                        data-id="@comment.id"
+                        data-portfolio-id="@comment.portfolioID">
+                    刪除
+                </button>
+            }
+             <p>@comment.comment</p>
+        }
+
+    </div>
+
+    <hr />
+}

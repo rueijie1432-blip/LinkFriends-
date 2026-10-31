@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Http
+
+
+@if (Context.Session.GetString("userName") != null)
+{
+    int accountID = Context.Session.GetInt32("accountID").Value;
+
+    <div class="dropdown ml-auto">
+        <span class="navbar-text dropdown-toggle">
+            @Context.Session.GetString("userName")
+        </span>
+
+        <div class="dropdown-menu">
+
+
+
+            @if (new AccountDB().IsAdmin(accountID))
+            {
+                <a class="dropdown-item text-danger"
+                   asp-controller="Admin"
+                   asp-action="Index">
+                    管理員後台
+                </a>
+            }
+
+            <a class="dropdown-item"
+               asp-controller="Account"
+               asp-action="Logout">
+                登出
+            </a>
+        </div>
+    </div>
+}

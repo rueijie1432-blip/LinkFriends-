@@ -1,0 +1,96 @@
+﻿@model List<MVC_DB_.Models.Friend>
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "好友";
+    int? accountID = Context.Session.GetInt32("accountID");
+}
+
+<!--好友留言用來判斷是不是自己發的訊息-->
+<script>
+    const currentAccountID = @accountID;
+</script>
+
+<h1>好友</h1>
+
+<hr />
+
+<h2>我的好友／好友邀請</h2>
+
+@if (Model.Count == 0)
+{
+    <p>目前沒有好友資料。</p>
+}
+else
+{
+    @foreach (var friend in Model)
+    {
+        <div style="border:1px solid #ccc; padding:15px; margin-bottom:10px;">
+
+            <p>
+                <strong>Friend ID：</strong>
+                @friend.id
+            </p>
+
+            <p>
+                <strong>發送者：</strong>
+                @friend.senderAccountID
+            </p>
+
+            <p>
+                <strong>接收者：</strong>
+                @friend.receiverAccountID
+            </p>
+
+            <p>
+                <strong>狀態：</strong>
+                @friend.status
+            </p>
+
+            @if (friend.status == 0)
+            {
+                if (friend.senderAccountID == accountID)
+                {
+                    <button onclick="updateFriend(@friend.id, 2)">
+                        取消申請
+                    </button>
+                }
+                else if (friend.receiverAccountID == accountID)
+                {
+                    <button onclick="updateFriend(@friend.id, 1)">
+                        接受
+                    </button>
+
+                    <button onclick="updateFriend(@friend.id, 2)">
+                        拒絕
+                    </button>
+                }
+            }
+
+            else if (friend.status == 1)
+            {
+                <button onclick="openChat(@friend.id)">
+                    聊天
+                </button>
+
+                <button onclick="deleteFriend(@friend.id)">
+                    刪除好友
+                </button>
+
+            }
+
+        </div>
+    }
+}
+
+<hr />
+
+<h2>可添加的好友</h2>
+
+<div id="userList"></div>
+
+<partial name="_FriendMessage" />
+
+<script src="~/js/Friend.js"></script>
+<script src="~/js/FriendMessage.js"></script>
+

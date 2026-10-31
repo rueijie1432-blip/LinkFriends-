@@ -1,0 +1,18 @@
+﻿@model MVC_DB_.Models.Portfolio
+
+<form id="commentForm-@Model.id"
+      asp-controller="PortfolioComment"
+      asp-action="Create"
+      method="post">
+
+    <input type="hidden"
+           name="portfolioID"
+           value="@Model.id" />
+
+    <input type="text"
+           name="comment"
+           placeholder="輸入留言" />
+
+    <button type="submit">留言</button>
+
+</form>

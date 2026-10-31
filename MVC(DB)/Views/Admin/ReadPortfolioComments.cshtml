@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MVC_DB_.Models.PortfolioComment>
+
+@{
+    ViewData["Title"] = "作品留言管理";
+}
+
+<h1>作品留言管理</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>留言 ID</th>
+            <th>留言內容</th>
+            <th>使用者 ID</th>
+            <th>作品 ID</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var comment in Model)
+        {
+            <tr>
+                <td>@comment.id</td>
+                <td>@comment.comment</td>
+                <td>@comment.accountID</td>
+                <td>@comment.portfolioID</td>
+                <td>
+                    @if (comment.isBlocked)
+                    {
+                        <a asp-action="SetPortfolioCommentBlock"
+                           asp-route-id="@comment.id"
+                           asp-route-isBlocked="false"
+                           class="btn btn-success btn-sm">
+                            取消封鎖
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="SetPortfolioCommentBlock"
+                           asp-route-id="@comment.id"
+                           asp-route-isBlocked="true"
+                           class="btn btn-danger btn-sm">
+                            封鎖
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
