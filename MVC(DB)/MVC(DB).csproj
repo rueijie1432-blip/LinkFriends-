@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>MVC_DB_</RootNamespace>
+    <UserSecretsId>d9776f1b-5df5-4e9d-816a-e447c46a7702</UserSecretsId>
   </PropertyGroup>
 
 	<!--
