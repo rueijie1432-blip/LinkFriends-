@@ -1,0 +1,5 @@
+==commit "user secrets + azure + txt"==
+把SQL連線字串放入USER User Secrets
+遇到問題:AZURE要設定環境變數
+把專案轉移到另一個專案部屬
+遇到問題:發布前引用同一個設定
