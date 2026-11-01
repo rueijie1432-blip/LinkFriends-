@@ -1,6 +1,3 @@
-# 忽略本機開發設定
-MVC(DB)/appsettings.Development.json
-
 # 忽略編譯產生的檔案
 MVC(DB)/bin/
 MVC(DB)/obj/
