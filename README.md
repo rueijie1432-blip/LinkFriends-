@@ -84,12 +84,3 @@ LinkFriends 是一個以社群互動為核心的交友平台，使用者可以�
 
 - Azure App Service：託管 ASP.NET MVC 網站。
 - Azure SQL Database：儲存會員、作品及社群互動資料。
-
-## 👨‍💻 開發資訊
-
-- 專案名稱：LinkFriends
-- 開發方式：個人開發
-- 開發架構：ASP.NET MVC
-- 開發語言：C#
-- 資料庫：SQL Server
-- 雲端平台：Microsoft Azure
